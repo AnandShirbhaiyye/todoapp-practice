@@ -22,6 +22,13 @@ try {
   console.log(`❌ Error:  ${err?.message}`);
 }
 
+app.get('/health', (req, res)=>{
+  res.json({
+    success: true,
+    message:"All Good🥳🥳"
+  })
+})
+
 
 
 app.listen(PORT, () => {
