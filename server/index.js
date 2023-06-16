@@ -26,6 +26,22 @@ app.get('/health', (req, res)=>{
 })
 
 //POST /task
+app.post('/task', async(req, res)=>{
+  const {title, description} = req.body;
+
+  const newTask = new Task({
+    title: title,
+    description: description
+  })
+
+  const savedTask = await newTask.save();
+
+  res.json({
+    success: true,
+    message: ' Task Saved Successfully...',
+    data: savedTask
+  })
+});
 
 //GET /tasks
 
