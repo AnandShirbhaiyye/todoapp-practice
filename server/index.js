@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import Task from './models/Task';
 dotenv.config();
 
 const app = express();
@@ -44,6 +45,15 @@ app.post('/task', async(req, res)=>{
 });
 
 //GET /tasks
+app.get('/tasks', async(req, res)=>{
+  const tasks = await Task.find();
+
+  res.json({
+    success: true,
+    message: "All tasks fetched successfully",
+    data: tasks
+  })
+});
 
 //GET / task
 
