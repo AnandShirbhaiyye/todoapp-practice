@@ -25,6 +25,16 @@ app.get('/health', (req, res)=>{
   })
 })
 
+//POST /task
+
+//GET /tasks
+
+//GET / task
+
+//DELETE /task/delete
+
+//PUT / task
+
 app.listen(PORT, () => {
     console.log(`The server is Running on Port ${PORT} 🚀`);
   });
