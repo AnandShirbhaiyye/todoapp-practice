@@ -86,8 +86,19 @@ app.get('/task', async(req, res)=>{
   })
 })
 
+//POST /task/delete
+app.post("/task/delete", async(req,res)=>{
+  const {taskId} = req.body;
 
-//DELETE /task/delete
+  await Task.deleteOne({
+    _id: taskId
+  })
+
+  res.json({
+    success: true,
+    message: "Task Successfully Deleted"
+  });
+})
 
 //PUT / task
 
