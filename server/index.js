@@ -56,10 +56,20 @@ app.get('/tasks', async(req, res)=>{
 });
 
 //GET / task
-app.get('/task', async(req,res)=>{
+app.get('/task', async(req, res)=>{
   const taskId = req.query.taskId;
 
-  const task = await Task.findOne({_id: taskId});
+  let task;
+  try{
+    task = await Task.findById(taskId);
+  }
+  catch(e){
+    return res.json({
+      success: false,
+      message: e.message,
+      data: []
+    });
+  }
 
   if(!task){
     return res.json({
@@ -68,7 +78,7 @@ app.get('/task', async(req,res)=>{
       data: []
     });
   }
-  
+
   res.json({
     success: true,
     message: 'Task successfully fetched',
