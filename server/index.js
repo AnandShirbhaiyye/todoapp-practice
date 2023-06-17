@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import Task from './models/Task';
+import Task from './models/Task.js';
 dotenv.config();
 
 const app = express();
@@ -56,6 +56,20 @@ app.get('/tasks', async(req, res)=>{
 });
 
 //GET / task
+app.get('./task', async(req,res)=>{
+  const taskId = req.query.taskId;
+
+  const task = await Task.findOne({_id: taskId});
+
+  if(!task){
+    return res.json({
+      success: false,
+      message: 'Task not found',
+      data: []
+    });
+  }
+})
+
 
 //DELETE /task/delete
 
