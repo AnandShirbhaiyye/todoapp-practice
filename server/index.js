@@ -15,7 +15,6 @@ async function connectMongoDB() {
 }
 connectMongoDB();
 
-const PORT = process.env.PORT || 5000;
 
 app.get("/health", (req, res) => {
   res.json({
@@ -98,6 +97,20 @@ app.post("/task/delete", async (req, res) => {
 });
 
 //PUT / task
+app.put("/task", async (req, res)=>{
+   const {taskId, title, description} = req.body;
+
+   const task = await Task.updateOne({_id: taskId},{
+    $set: {title: title, description: description}
+   })
+
+   res.json({
+    success: true,
+    message: "Task successfully updated..."
+   })
+});
+
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`The server is Running on Port ${PORT} 🚀`);
