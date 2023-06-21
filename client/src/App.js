@@ -1,6 +1,9 @@
+import React, {useState, useEffect} from "react";
 import "./App.css";
 
 function App() {
+  const[title, setTitle] = useState("");
+  const [description, setDescription] = useState("")
   return (
     <>
      <div className="container">
@@ -20,6 +23,7 @@ function App() {
                       type="text"
                       className="form-control"
                       placeholder="Enter Title"
+                      value={title}
                     />
                   </div>
                   <div className="mb-3">
@@ -27,6 +31,7 @@ function App() {
                       type="text"
                       className="form-control"
                       placeholder="Enter Discription"
+                      value={description}
                     />
                   </div>
                   <button
