@@ -8,13 +8,13 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
-  const loadTask = async()=>{
-    const {data} = await axios.get("/tasks")
-    setTasks(data?.data)
-  }
-  useEffect(()=>{
+  const loadTask = async () => {
+    const { data } = await axios.get("/tasks");
+    setTasks(data?.data);
+  };
+  useEffect(() => {
     loadTask();
-  }, [])
+  }, []);
 
   const addTask = async () => {
     const { data } = await axios.post("/task", {
@@ -26,6 +26,17 @@ function App() {
     setDescription("");
     loadTask();
   };
+
+  const deleteTask = async (taskId) => {
+    const {data} = await axios.post('/task/delete',{
+      taskId: taskId
+    })
+    alert(data?.message);
+    loadTask();
+    
+  };
+
+
   return (
     <>
       <div className="container">
@@ -61,29 +72,36 @@ function App() {
                     />
                   </div>
                   <button
-                    className="login-page-btn btn btn-warning w-100 mb-3"
+                    className="btn btn-warning w-100 mb-3"
                     type="button"
                     onClick={addTask}
                   >
                     {" "}
-                  <b>AddTask</b>
+                    <b>AddTask</b>
                   </button>
                 </form>
               </div>
             </div>
             <div className="col-md-6">
-            <div className="todo-container shadow-sm p-3 mt-2">
-            <h4 className="text-center mt-2 mb-4">All Tasks↘️</h4>
-                {
-                  tasks.map((task)=>{
-                    return(
-                      <div className="card shadow-sm p-1 mt-2">
-                        <h5>{task?.title}</h5>
-                        <p>{task?.description}</p>
-                      </div>
-                    )
-                  })
-                }
+              <div className="todo-container shadow-sm p-3 mt-2">
+                <h4 className="text-center mt-2 mb-4">All Tasks📃</h4>
+                {tasks.map((task) => {
+                  return (
+                    <div className="card shadow-sm p-1 mt-2">
+                      <h5>{task?.title}</h5>
+                      <p>{task?.description}</p>
+                      <span
+                        className="delete-button"
+                        onClick={() => {
+                          deleteTask(task?._id);
+                        }}
+                      >
+                        {" "}
+                       ❌
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
