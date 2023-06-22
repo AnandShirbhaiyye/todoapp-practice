@@ -24,17 +24,18 @@ function App() {
     alert(data?.message);
     setTitle("");
     setDescription("");
+    loadTask();
   };
   return (
     <>
       <div className="container">
         <div className="card shadow-lg mt-5 p-5">
           <div className="text-center mb-4">
-            <h2>ToDoApp</h2>
+            <h2>ToDoApp✅</h2>
           </div>
           <div className="row">
             <div className="col-md-6">
-              <div className="card shadow-sm p-3">
+              <div className="card shadow-sm p-3 mt-5">
                 <form>
                   <h4 className="text-center mt-3 mb-4">➕Add Tasks</h4>
                   <div className="mb-3">
@@ -60,22 +61,23 @@ function App() {
                     />
                   </div>
                   <button
-                    className="login-page-btn btn btn-primary w-100 mb-3"
+                    className="login-page-btn btn btn-warning w-100 mb-3"
                     type="button"
                     onClick={addTask}
                   >
                     {" "}
-                   addTask
+                  <b>AddTask</b>
                   </button>
                 </form>
               </div>
             </div>
             <div className="col-md-6">
-              <div className="todo-container">
+            <div className="todo-container shadow-sm p-3 mt-2">
+            <h4 className="text-center mt-2 mb-4">All Tasks↘️</h4>
                 {
                   tasks.map((task)=>{
                     return(
-                      <div>
+                      <div className="card shadow-sm p-1 mt-2">
                         <h5>{task?.title}</h5>
                         <p>{task?.description}</p>
                       </div>
