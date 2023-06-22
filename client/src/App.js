@@ -28,14 +28,12 @@ function App() {
   };
 
   const deleteTask = async (taskId) => {
-    const {data} = await axios.post('/task/delete',{
-      taskId: taskId
-    })
+    const { data } = await axios.post("/task/delete", {
+      taskId: taskId,
+    });
     alert(data?.message);
     loadTask();
-    
   };
-
 
   return (
     <>
@@ -97,7 +95,7 @@ function App() {
                         }}
                       >
                         {" "}
-                       ❌
+                        ❌
                       </span>
                     </div>
                   );
