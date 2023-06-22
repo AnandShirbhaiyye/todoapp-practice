@@ -6,6 +6,16 @@ function App() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const [tasks, setTasks] = useState([]);
+
+  const loadTask = async()=>{
+    const {data} = await axios.get("/tasks")
+    setTasks(data?.data)
+  }
+  useEffect(()=>{
+    loadTask();
+  }, [])
+
   const addTask = async () => {
     const { data } = await axios.post("/task", {
       title: title,
@@ -55,12 +65,25 @@ function App() {
                     onClick={addTask}
                   >
                     {" "}
-                    addTask
+                   addTask
                   </button>
                 </form>
               </div>
             </div>
-            <div className="col-md-6">Hello</div>
+            <div className="col-md-6">
+              <div className="todo-container">
+                {
+                  tasks.map((task)=>{
+                    return(
+                      <div>
+                        <h5>{task?.title}</h5>
+                        <p>{task?.description}</p>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+            </div>
           </div>
         </div>
       </div>
