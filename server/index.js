@@ -15,7 +15,6 @@ async function connectMongoDB() {
 }
 connectMongoDB();
 
-
 app.get("/health", (req, res) => {
   res.json({
     success: true,
@@ -97,17 +96,20 @@ app.post("/task/delete", async (req, res) => {
 });
 
 //PUT / task
-app.put("/task", async (req, res)=>{
-   const {taskId, title, description} = req.body;
+app.put("/task", async (req, res) => {
+  const { taskId, title, description } = req.body;
 
-   const task = await Task.updateOne({_id: taskId},{
-    $set: {title: title, description: description}
-   })
+  const task = await Task.updateOne(
+    { _id: taskId },
+    {
+      $set: { title: title, description: description },
+    }
+  );
 
-   res.json({
+  res.json({
     success: true,
-    message: "Task successfully updated..."
-   })
+    message: "Task successfully updated...",
+  });
 });
 
 const PORT = process.env.PORT || 5000;
