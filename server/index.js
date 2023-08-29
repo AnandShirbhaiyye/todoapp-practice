@@ -2,7 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import Task from "./models/Task.js";
+import path from 'path';
 dotenv.config();
+const __dirname = path.resolve();
 
 const app = express();
 app.use(express.json());
@@ -111,6 +113,14 @@ app.put("/task", async (req, res) => {
     message: "Task successfully updated...",
   });
 });
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
+   });
+  }
 
 const PORT = process.env.PORT || 5000;
 
